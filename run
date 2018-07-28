@@ -1,0 +1,11 @@
+./find_circle_test /home/jackymond/data/opencv/calib_images/left03.jpg
+./find_circle_test /home/jackymond/data/opencv/circle_grid/circle01.png
+
+./make_image_list --name_reg "(\\d*)" --image_path /home/jackymond/workspace/kalibr/optor_camera/image/
+./make_image_list --name_reg "(\\d*)" --image_path /home/jackymond/data/kalibr/chessboard/
+
+
+./make_file_list --folder /home/jackymond/Data/image/fan2_lasor_visual/left_camera/ --om XML --on file_list.xml
+
+./calibration -w 7 -h 7 -s 0.023 -o camera.yml image_list.xml
+
