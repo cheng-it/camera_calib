@@ -7,12 +7,12 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 #set(CMAKE_PREFIX_PATH "/usr/local/opencv-3.1.0/share/OpenCV")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-set(HALCONROOT /home/jackymond/software/halcon)
+set(HALCONROOT /home/jackymond/Software/halcon)
 
 find_package(Boost COMPONENTS filesystem regex REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-find_package(OpenCV 3.1.0 REQUIRED)
+find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 include_directories(
@@ -55,7 +55,7 @@ target_link_libraries(planar_pose_extraction
 	${HALCON_LIBS}
 )
 
-add_subdirectory(src/halcon_wrapper)
+#add_subdirectory(src/halcon_wrapper)
 #add_subdirectory(include/cv_calib)
-add_subdirectory(include/kalibr)
-add_subdirectory(include/utils)
+#add_subdirectory(include/kalibr)
+#add_subdirectory(include/utils)

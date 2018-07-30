@@ -9,8 +9,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "opencv2/calib3d/calib3d.hpp"
 
-#include "halcon_wapper/cv_convert.h"
-#include "halcon_wapper/calibrate.h"
+#include "halcon_wrapper/cv_convert.h"
+#include "halcon_wrapper/calibrate.h"
 
 using namespace HalconCpp;
 using namespace std;
@@ -32,17 +32,20 @@ int main(int argc, char *argv[])
   HTuple hv_PlateDescription;
   hv_PlateDescription = plateDescriptionFile.c_str();
   
+  const string camParamFile = "/home/jackymond/Data/camera_parameters.dat";
   HTuple hv_CamParam;
-  hv_CamParam.Clear();
-  hv_CamParam[0] = "area_scan_division";
-  hv_CamParam[1] = 0.00414847;
-  hv_CamParam[2] = -33485.5;
-  hv_CamParam[3] = 8.31651e-06;
-  hv_CamParam[4] = 8.3e-06;
-  hv_CamParam[5] = 357.822;
-  hv_CamParam[6] = 242.925;
-  hv_CamParam[7] = 752;
-  hv_CamParam[8] = 480;
+  hc_readCamParam(hv_CamParam, camParamFile);
+  // hv_CamParam.Clear();
+  // hv_CamParam[0] = "area_scan_division";
+  // hv_CamParam[1] = 0.00414847;
+  // hv_CamParam[2] = -33485.5;
+  // hv_CamParam[3] = 8.31651e-06;
+  // hv_CamParam[4] = 8.3e-06;
+  // hv_CamParam[5] = 357.822;
+  // hv_CamParam[6] = 242.925;
+  // hv_CamParam[7] = 752;
+  // hv_CamParam[8] = 480;
+
   
   cv:Mat frame = imread(imageFile, CV_LOAD_IMAGE_GRAYSCALE);
   if (frame.empty())

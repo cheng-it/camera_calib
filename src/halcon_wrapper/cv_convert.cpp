@@ -1,4 +1,4 @@
-#include <halcon_wapper/cv_convert.h>
+#include <halcon_wrapper/cv_convert.h>
 
 using namespace HalconCpp;
 using namespace std;

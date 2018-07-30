@@ -1,5 +1,5 @@
-#include "halcon_wapper/cv_convert.h"
-#include "halcon_wapper/calibrate.h"
+#include "halcon_wrapper/cv_convert.h"
+#include "halcon_wrapper/calibrate.h"
 
 namespace halcon_wrapper
 {
@@ -235,23 +235,25 @@ namespace halcon_wrapper
 		ChangeRadialDistortionCamPar("adaptive", hv_CamParam, 0, &hv_CarParamVirtualFixed);
 		GenRadialDistortionMap(&ho_Map, hv_CamParam, hv_CarParamVirtualFixed, "bilinear");
 		MapImage(ho_Image, ho_Map, &ho_ImageMapped);
-		}
+	}
 
-		void cv_UndistortImage(const cv::Mat &cv_Image, cv::Mat &cv_ImageMapped, const HTuple &hv_CamParam)
-		{
+	void cv_UndistortImage(const cv::Mat &cv_Image, cv::Mat &cv_ImageMapped, const HTuple &hv_CamParam)
+	{
 		HObject ho_Image;
 		cvImageToHImage(cv_Image, ho_Image);
 
 		//校正畸变
 		HTuple hv_CarParamVirtualFixed;
 		HObject ho_Map, ho_ImageMapped;
-		ChangeRadialDistortionCamPar("adaptive", hv_CamParam, ((((HTuple(0).Append(0)).Append(0)).Append(0)).Append(0)), &hv_CarParamVirtualFixed);
+		if (string(hv_CamParam[0].S().Text()) == "area_scan_polynomial")
+			ChangeRadialDistortionCamPar("adaptive", hv_CamParam, ((((HTuple(0).Append(0)).Append(0)).Append(0)).Append(0)), &hv_CarParamVirtualFixed);
+		else if (string(hv_CamParam[0].S().Text()) == "area_scan_division")
+			ChangeRadialDistortionCamPar("adaptive", hv_CamParam, 0, &hv_CarParamVirtualFixed);
 		GenRadialDistortionMap(&ho_Map, hv_CamParam, hv_CarParamVirtualFixed, "bilinear");
 		MapImage(ho_Image, ho_Map, &ho_ImageMapped);
 
 		hImageToCVImage(ho_ImageMapped, cv_ImageMapped);
 	}
-
 
 	//////////////////////////////
 	// planar pose extraction

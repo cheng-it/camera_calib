@@ -9,8 +9,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "opencv2/calib3d/calib3d.hpp"
 
-#include "halcon_wapper/cv_convert.h"
-#include "halcon_wapper/calibrate.h"
+#include "halcon_wrapper/cv_convert.h"
+#include "halcon_wrapper/calibrate.h"
 
 using namespace HalconCpp;
 using namespace std;
@@ -21,14 +21,14 @@ int runCalibrate()
 {
   const string imageFolder = "/home/jackymond/Data/image/fan2_lasor_visual/left_camera";
   const string plateDescriptionFile = "/home/jackymond/Software/halcon/calib/caltab_30mm.descr";
-  const string camParamSaveDir = "/home/jackymond";
+  const string camParamSaveDir = "/home/jackymond/Data";
   hc_calibrateMonoCular(imageFolder, plateDescriptionFile, camParamSaveDir);
 }
 
 int runUndistort()
 {
   const string imageFile = "/home/jackymond/Data/image/fan2_lasor_visual/left_camera/img30.jpg";
-  const string camParamFile = "/home/jackymond/camera_parameters.dat";
+  const string camParamFile = "/home/jackymond/Data/camera_parameters.dat";
   HTuple hv_CamParam;
   hc_readCamParam(hv_CamParam, camParamFile);
   
@@ -48,7 +48,7 @@ int runUndistort()
 int main(int argc, char *argv[])
 {
   runCalibrate();
-  //runUndistort();
+  runUndistort();
   return 0;
 }
 
