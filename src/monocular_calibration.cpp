@@ -15,14 +15,14 @@
 using namespace HalconCpp;
 using namespace std;
 using namespace cv;
-using namespace halcon_wapper;
+using namespace halcon_wrapper;
 
 int runCalibrate()
 {
   const string imageFolder = "/home/jackymond/Data/image/fan2_lasor_visual/left_camera";
   const string plateDescriptionFile = "/home/jackymond/Software/halcon/calib/caltab_30mm.descr";
   const string camParamSaveDir = "/home/jackymond";
-  calibrateMonoCular(imageFolder, plateDescriptionFile, camParamSaveDir);
+  hc_calibrateMonoCular(imageFolder, plateDescriptionFile, camParamSaveDir);
 }
 
 int runUndistort()

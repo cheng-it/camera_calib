@@ -15,9 +15,9 @@
 using namespace HalconCpp;
 using namespace std;
 using namespace cv;
-using namespace halcon_wapper;
+using namespace halcon_wrapper;
 
-void printCorners(const cv::vector<cv::Point2f> corners)
+void printCorners(const std::vector<cv::Point2f> corners)
 {
   cout << "print all corners." << endl;
   for (int i = 0; i < corners.size(); i++)
@@ -25,9 +25,7 @@ void printCorners(const cv::vector<cv::Point2f> corners)
 }
 
 int main(int argc, char *argv[])
-{
-  using namespace halcon_wapper;
-  
+{ 
   const string imageFile = "/home/jackymond/Data/image/fan2_lasor_visual/left_camera/img30.jpg";
   
   const string plateDescriptionFile = "/home/jackymond/Software/halcon/calib/caltab_30mm.descr";
@@ -61,7 +59,7 @@ int main(int argc, char *argv[])
   char key1 = (char)waitKey();
   destroyWindow("Undistort");
   
-  cv_FindMarisAndPose(frame, hv_CamParam, hv_PlateDescription, centers, R, t);
+  cv_FindMarksAndPose(frame, hv_CamParam, hv_PlateDescription, centers, R, t);
   cout << "R: " << R << endl;
   cout << "t: " << t << endl;
   printCorners(centers);
